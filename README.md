@@ -95,4 +95,4 @@ Cool! Isn't it?
 
 ## Unsupport Case
 * set default value in array/slice is not support now, will supported later
-* nested link is not supported
+* nested linked-list is not supported
