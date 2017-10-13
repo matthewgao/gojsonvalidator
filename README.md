@@ -86,7 +86,7 @@ err := ValidateJson([]byte(body), &p)
 fmt.Println(err)
 ~~~
 
-Cool! Isn't it?
+Cool! Isn't it? See more example in example_test.go
 
 ## Note
 * int and bool are two special type, because int takes 0 as a default value when doing unmarshal, bool take a false as a default value, so we have no way to know if 0 is a caller specified value or default value, so we use pointer, if it those key is not given, then it will be a nil pointer
