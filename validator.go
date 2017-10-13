@@ -12,6 +12,7 @@ import (
 // 1. int, bool 类型声明的时候必须用指针
 // 2. 如果是嵌入对象，那么必须是required，不然会panic
 // 4. 类似链表嵌套
+// set default value in array/slice is not support now
 
 func ValidateJson(in []byte, v interface{}) error {
 	err := json.Unmarshal(in, v)
@@ -126,11 +127,15 @@ func ValidateParameters(in interface{}) (err error) {
 		}
 
 		if maxLen, ok := sf.Tag.Lookup("max_len"); ok {
+			maxLenInt, _ := strconv.Atoi(maxLen)
 			switch sf.Type.Kind() {
 			case reflect.String:
-				maxLenInt, _ := strconv.Atoi(maxLen)
 				s := sv.String()
 				if len(s) > maxLenInt {
+					return fmt.Errorf("%s exceed the max len %d", sf.Name, maxLenInt)
+				}
+			case reflect.Slice, reflect.Array:
+				if sv.Len() > maxLenInt {
 					return fmt.Errorf("%s exceed the max len %d", sf.Name, maxLenInt)
 				}
 			}
