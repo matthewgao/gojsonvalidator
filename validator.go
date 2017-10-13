@@ -28,11 +28,10 @@ func ValidateJson(in []byte, v interface{}) error {
 	return nil
 }
 
-//注意 最大值最小值的校验当应用在update动作时候，可能会导致json umarshal时候给了默认值0 返回错误 -gs
 func ValidateParameters(in interface{}) (err error) {
-	defer func() { // 必须要先声明defer，否则不能捕获到panic异常
+	defer func() {
 		if err := recover(); err != nil {
-			fmt.Println(err) // 这里的err其实就是panic传入的内容，55
+			fmt.Println(err)
 		}
 	}()
 	//Indirect returns the value that v points to. If v is a nil pointer,
