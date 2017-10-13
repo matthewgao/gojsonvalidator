@@ -23,7 +23,7 @@ Assuming you have this json:
 * name is required
 * age is in 0-120 range, and required
 * married is required
-* hobby can specify more then 4
+* hobby can not specify more then 4
 * major can only be "cs" or "ee"
 * contact_info is optional
 * tele has a default value 1234
