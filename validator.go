@@ -75,6 +75,12 @@ func ValidateParameters(in interface{}) (err error) {
 				if sv.Len() == 0 {
 					return fmt.Errorf("Invalid request: missing %s", sf.Name)
 				}
+				for i := 0; i < sv.Len(); i++ {
+					err = ValidateParameters(sv.Index(i).Interface())
+					if err != nil {
+						return err
+					}
+				}
 			}
 		} else {
 			switch sf.Type.Kind() {
